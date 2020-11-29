@@ -36,7 +36,8 @@
                 if (usercentrics.getConsents('HyEX5Nidi-m').consentStatus === true) {
                     console.log("Consent for Vimeo was given")
                     let iframe = document.createElement('iframe');
-                    iframe.setAttribute('id', "Vimeo_iframe");
+                    // iframe.setAttribute('id', 'Vimeo_iframe');
+                    iframe.id = "Vimeo_iframe";
                     vimeoInside.style.display = "none";
                     iframe.src = "https://player.vimeo.com/video/40409289";
                     iframe.style.width = "640px";
@@ -46,7 +47,7 @@
                 else {
                     console.log("Consent was revoked")
                     vimeoInside.style.display = "block";
-                    vimeoWrapper.parentNode.removeChild(document.getElementById("Vimeo_iframe"));
+                    vimeoWrapper.removeChild(document.getElementById("Vimeo_iframe"));
                 }
             }
         });
