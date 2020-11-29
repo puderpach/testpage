@@ -30,6 +30,7 @@
     <!-- End Google Analytics -->
     <script>
         window.addEventListener("uc_consent", function (e) {
+            if (e.data.event == "consent_changed Vimeo") {
                 console.log("Consent changed");
                 if (usercentrics.getConsents('HyEX5Nidi-m')) {
                     let iframe = document.createElement('iframe');
@@ -44,6 +45,7 @@
                     console.log("Consent was revoked")
                 }
             }
+        });
     </script>
 </head>
 
