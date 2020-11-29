@@ -13,6 +13,7 @@
     <script>
         uc.deactivateBlocking([
             'HkocEodjb7', // Google Analytics is not blocked
+            'HyEX5Nidi-m', // Vimeo is not blocked
         ]);
     </script>
     <!-- End Smart Data Protector -->
@@ -27,6 +28,25 @@
     ga('send', 'pageview');
     </script>
     <!-- End Google Analytics -->
+    <script>
+        window.addEventListener("uc_consent", function (e) {
+            if (e.data.event == "consents_changed") {
+                console.log("Consent changed");
+                if (usercentrics.getConsents('HyEX5Nidi-m')) {
+                    let iframe = document.createElement('iframe');
+                    let vimeoWrapper = document.getElementById("vimeo-wrapper")
+                    let vimeoInside = document.getElementById("vimeo-wrapper-inside").style.display = "none";
+                    iframe.src = "https://player.vimeo.com/video/40409289";
+                    iframe.style.width = "640px";
+                    iframe.style.height = "360px";
+                    vimeoWrapper.appendChild(iframe);
+                }
+                else {
+                    console.log("Consent was revoked")
+                }
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -67,10 +87,24 @@
         src="https://cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js"
         data-configuration="https://feed-dive.podigee.io/5-was-macht-ein-podcast-hoster-eigentlich/embed?context=external"></script>
     <h2>Vimeo Video</h2>
-    <iframe src="https://player.vimeo.com/video/40409289" width="640" height="360" frameborder="0"
-        allow="autoplay; fullscreen" allowfullscreen></iframe>
-    <p><a href="https://vimeo.com/40409289">Brain Farm Digital Cinema Reel</a> from <a
-            href="https://vimeo.com/brainfarm">BrainFarm</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+    <div id=vimeo-wrapper>
+        <div id=vimeo-wrapper-inside
+            style="width:420px;height:261px;border-radius:1px;box-shadow:  rgba(0, 0, 0, 0.5) 0px 3px 6px 0px;">
+            <div id=vimeo-wrapper-text>
+                <h3 style="font-size: 18px;font-weight: bold;margin-top: 0px; text-align:center; padding:10px">
+                    Wir benötigen Ihre Zustimmung, um Vimeo Video zu laden!</h3>
+                <div style="font-size: 18px;font-weight: bold; text-align:center; padding:10px"></div>
+                Wir verwenden Vimeo, um Inhalte einzubetten. Dieser Service kann Daten zu Ihren Aktivitäten
+                sammeln. Bitte lesen Sie die Details durch und stimmen Sie der Nutzung des Service zu, um diese
+                Inhalte anzuzeigen.
+            </div>
+            <button onclick="usercentrics.updateCornerModalIsVisible(true);"
+                style="font-size: 16px;font-weight: bold;display: inline-block;height: 40px;padding-top: 10px;letter-spacing: 1.2;padding-left: 25px;padding-right: 25px;margin-bottom: 15px;background: #cecece;color: rgb(0, 0, 0);border-radius:4px;border-color:#fff">Mehr
+                Informationen</button>
+            <button onclick="usercentrics.updateConsents([{'templateId':'HyEX5Nidi-m', 'status':true}])"
+                style="font-size: 16px;font-weight: bold;display: inline-block;height: 40px;padding-top: 10px;letter-spacing: 1.2;padding-left: 25px;padding-right: 25px;margin-bottom: 15px;background: #0096ff;color: #fff;border-radius:4px;border-color:#fff">Akzeptieren</button>
+        </div>
+    </div>
 </body>
 
 </html>
