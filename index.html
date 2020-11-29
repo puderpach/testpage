@@ -28,9 +28,9 @@
     ga('send', 'pageview');
     </script>
     <!-- End Google Analytics -->
-        <script>
+    <script>
         window.addEventListener("uc_consent", function (e) {
-            if (e.data.event == "consents_changed") {
+            if (e.data.event == "consent_changed") {
                 console.log("Consent changed");
                 if (usercentrics.getConsents('HyEX5Nidi-m')) {
                     let iframe = document.createElement('iframe');
