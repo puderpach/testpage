@@ -12,7 +12,7 @@
         src="https://privacy-proxy.usercentrics.eu/latest/uc-block.bundle.js"></script>
     <script>
         uc.deactivateBlocking([
-            'HkocEodjb7', // Google Analytics is not blocked
+            // 'HkocEodjb7', // Google Analytics is not blocked
             'HyEX5Nidi-m', // Vimeo is not blocked
         ]);
     </script>
@@ -36,7 +36,6 @@
                 if (usercentrics.getConsents('HyEX5Nidi-m').consentStatus === true) {
                     console.log("Consent for Vimeo was given")
                     let iframe = document.createElement('iframe');
-                    // iframe.setAttribute('id', 'Vimeo_iframe');
                     iframe.id = "Vimeo_iframe";
                     vimeoInside.style.display = "none";
                     iframe.src = "https://player.vimeo.com/video/40409289";
